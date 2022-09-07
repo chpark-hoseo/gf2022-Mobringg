@@ -1,6 +1,7 @@
 ﻿// SDL 
 //
 // written by changhoonpark@gmail.com
+// lab 실습
 
 
 #include "main.h"
