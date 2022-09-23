@@ -1,23 +1,20 @@
-+﻿#include <SDL2/SDL.h>
+﻿#include <SDL2/SDL.h>
 #include <cstdlib>
 #include <ctime>
 #include <stdio.h>
 #include <iostream>
 using namespace std;
->>>>>> > Stashed changes
 
 
-<<<<<< < Updated upstream
+
 #include "main.h"
 
 
-	@ - 204, 4 + 213, 62 @@ void render()
-	filledCircleColor(g_pRenderer, 300, 300, 50, 0xFFFF0000);
+	
 
-SDL_RenderPresent(g_pRenderer);
-}
-}
-====== =
+
+SDL_Window* g_pWindow = 0;
+SDL_Renderer* g_pRenderer = 0;
 bool g_bRunning = false;
 bool init(const char* title, int xpos, int ypos, int height, int width, int flags);
 void Render();
@@ -46,6 +43,7 @@ int main(int argc, char* argv[])
 			switch (event.type) {
 			case SDL_KEYDOWN:
 				printf("Key press detected\n");
+				SDL_Quit();
 				break;
 			case SDL_KEYUP:
 				printf("Key release detected\n");
@@ -81,4 +79,3 @@ void Render()
 	SDL_RenderPresent(g_pRenderer);
 }
 
->>>>>> > Stashed changes
