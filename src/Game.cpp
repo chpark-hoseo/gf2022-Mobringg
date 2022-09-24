@@ -47,7 +47,7 @@ bool Game::running()
 void Game::handleEvents()
 {
     SDL_Event event;
-    if (SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event)) //if>>while로 바꾸는이유는 if문일때 해당코드가 한번만 돌고 끝나기때문에 while문을 통해 계속 반복시키기 위해
     {
         switch (event.type)
         {

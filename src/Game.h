@@ -6,7 +6,7 @@ public:
 	Game() { }
 	~Game() { }
 
-	bool init(/* 수정 필요 */);
+	bool init(const char* title, int xpos, int ypos, int height, int width, int flags);
 	void render();
 	void update();
 	bool running();
@@ -18,3 +18,4 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 };
+#pragma once
