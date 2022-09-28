@@ -28,6 +28,8 @@ private:
 	SDL_Rect m_destinationRectangle;
 	SDL_Rect m_destinationRectangle1;
 
+	int dir = 1;
+
 	typedef struct SDL_Rect
 	{
 		int x, y;

@@ -17,16 +17,16 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             }
         }
         else {
-            return false; // 윈도우 생설 실패 l
+            return false; // 윈도우 생성 실패
         }
     }
     else {
         return false; // SDL 초기화 실패
     }
 
-
-    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
     SDL_Surface* pTempBackground = SDL_LoadBMP("assets/123.bmp");
+    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
+    
 
     m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
@@ -59,14 +59,25 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
-
+    if (m_destinationRectangle.x <= 0)
+    {
+        dir = 1;
+    }
+    else if (m_destinationRectangle.x >= 480-m_destinationRectangle.w)
+    {
+        dir = -1;
+    }
+    m_destinationRectangle.x += dir;
+    SDL_Delay(10);
 }
+
+
 
 void Game::render()
 {
-    const int chgWay_Max = 640 - m_destinationRectangle.w;
+    
     SDL_RenderClear(m_pRenderer);
-    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle, &m_destinationRectangle);
+    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle1, &m_destinationRectangle1);
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
 
   
