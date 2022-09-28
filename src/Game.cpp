@@ -23,17 +23,32 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     else {
         return false; // SDL 초기화 실패
     }
+
+
     SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
+    SDL_Surface* pTempBackground = SDL_LoadBMP("assets/123.bmp");
 
+    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-
+   
+    SDL_FreeSurface(pTempBackground);
     SDL_FreeSurface(pTempSurface);
+    
+    SDL_QueryTexture(m_pTexture1, NULL, NULL,
+        &m_sourceRectangle1.w, &m_sourceRectangle1.h);
 
     SDL_QueryTexture(m_pTexture, NULL, NULL,
     &m_sourceRectangle.w, &m_sourceRectangle.h);
 
+
+    m_destinationRectangle1.w = m_sourceRectangle1.w;
+    m_destinationRectangle1.h = m_sourceRectangle1.h;
+
     m_destinationRectangle.w = m_sourceRectangle.w;
     m_destinationRectangle.h = m_sourceRectangle.h;
+
+    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
+    m_destinationRectangle1.y = m_sourceRectangle1.y = 0;
 
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
@@ -49,8 +64,12 @@ void Game::update()
 
 void Game::render()
 {
+    const int chgWay_Max = 640 - m_destinationRectangle.w;
     SDL_RenderClear(m_pRenderer);
+    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle, &m_destinationRectangle);
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+
+  
     SDL_RenderPresent(m_pRenderer);
     
 }
@@ -78,6 +97,7 @@ void Game::handleEvents()
 
 void Game::clean() 
 {
+    SDL_DestroyTexture(m_pTexture);
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
