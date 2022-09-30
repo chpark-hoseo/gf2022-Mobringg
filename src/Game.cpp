@@ -24,28 +24,39 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         return false; // SDL 초기화 실패
     }
 
-   // SDL_Surface* pTempBackground = SDL_LoadBMP("assets/123.bmp");
+    ;
     SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
+    SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
     
 
-    //m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
-    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-   
-    //SDL_FreeSurface(pTempBackground);
-    SDL_FreeSurface(pTempSurface);
     
-    SDL_QueryTexture(m_pTexture1, NULL, NULL,
-        &m_sourceRectangle1.w, &m_sourceRectangle1.h);
+    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
+   
+  
+    SDL_FreeSurface(pTempSurface);
+    SDL_FreeSurface(pTempBackground);
+    
+
+  
 
     m_sourceRectangle.w = 128;
     m_sourceRectangle.h = 82;
 
+    m_sourceRectangle1.w = 128;
+    m_sourceRectangle1.h = 82;
+
     m_destinationRectangle.w = m_sourceRectangle.w;
     m_destinationRectangle.h = m_sourceRectangle.h;
+
+    m_destinationRectangle1.w = m_sourceRectangle1.w;
+    m_destinationRectangle1.h = m_sourceRectangle1.h;
 
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
+    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
+    m_destinationRectangle1.y = m_sourceRectangle1.y = 80;
 
 
    
@@ -68,6 +79,7 @@ void Game::update()
     SDL_Delay(10);*/
 
     m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
+    m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
 }
 
 
@@ -76,8 +88,9 @@ void Game::render()
 {
     
     SDL_RenderClear(m_pRenderer);
-    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle1, &m_destinationRectangle1);
+    
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle1, &m_destinationRectangle1);
 
   
     SDL_RenderPresent(m_pRenderer);
