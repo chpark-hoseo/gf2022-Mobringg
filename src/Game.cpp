@@ -11,7 +11,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 255, 255, 255);
+                    m_pRenderer, 255, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -26,23 +26,23 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
     ;
-    SDL_Surface* pTempSurface = IMG_Load("assets/bus.png");
-    //SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
+    SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
+    SDL_Surface* pTempBackground = IMG_Load("assets/animate-alpha.png");
     
 
     
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-    //m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
+    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
    
   
     SDL_FreeSurface(pTempSurface);
-    //SDL_FreeSurface(pTempBackground);
+    SDL_FreeSurface(pTempBackground);
     
 
   
 
-    m_sourceRectangle.w = 500;
-    m_sourceRectangle.h = 500;
+    m_sourceRectangle.w = 128;
+    m_sourceRectangle.h = 82;
 
     m_sourceRectangle1.w = 128;
     m_sourceRectangle1.h = 82;
@@ -56,8 +56,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_destinationRectangle.x = m_sourceRectangle.x = 100;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
-    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
-    m_destinationRectangle1.y = m_sourceRectangle1.y = 80;
+    m_destinationRectangle1.x = 0;
+    m_destinationRectangle1.y = 80;
 
 
    
