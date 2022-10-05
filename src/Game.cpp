@@ -25,23 +25,23 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
     ;
-    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
-    SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
+    SDL_Surface* pTempSurface = IMG_Load("assets/bus.png");
+    //SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
     
 
     
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
+    //m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
    
   
     SDL_FreeSurface(pTempSurface);
-    SDL_FreeSurface(pTempBackground);
+    //SDL_FreeSurface(pTempBackground);
     
 
   
 
-    m_sourceRectangle.w = 128;
-    m_sourceRectangle.h = 82;
+    m_sourceRectangle.w = 500;
+    m_sourceRectangle.h = 500;
 
     m_sourceRectangle1.w = 128;
     m_sourceRectangle1.h = 82;
