@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <SDL2/SDL_image.h>
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, int flags)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -55,8 +55,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
-    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
-    m_destinationRectangle1.y = m_sourceRectangle1.y = 80;
+    m_destinationRectangle1.x = 0;
+    m_destinationRectangle1.y = 80;
 
 
    
