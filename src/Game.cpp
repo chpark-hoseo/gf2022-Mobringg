@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <SDL2/SDL_image.h>
 
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, int flags)
 {
@@ -10,7 +11,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 255, 255, 255);
+                    m_pRenderer, 255, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -25,17 +26,17 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
     ;
-    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
-    SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
+    SDL_Surface* pTempSurface = IMG_Load("assets/animate.png");
+    //SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
     
 
     
     m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
+    //m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
    
   
     SDL_FreeSurface(pTempSurface);
-    SDL_FreeSurface(pTempBackground);
+    //SDL_FreeSurface(pTempBackground);
     
 
   
