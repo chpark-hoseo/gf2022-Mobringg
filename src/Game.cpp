@@ -10,7 +10,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 255, 255, 255);
+                    m_pRenderer, 255, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -22,44 +22,10 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
     else {
         return false; // SDL 초기화 실패
-    }
+    };
 
-    ;
-    SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
-    SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
-    
-
-    
-    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-    m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
-   
-  
-    SDL_FreeSurface(pTempSurface);
-    SDL_FreeSurface(pTempBackground);
-    
-
-  
-
-    m_sourceRectangle.w = 128;
-    m_sourceRectangle.h = 82;
-
-    m_sourceRectangle1.w = 128;
-    m_sourceRectangle1.h = 82;
-
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
-
-    m_destinationRectangle1.w = m_sourceRectangle1.w;
-    m_destinationRectangle1.h = m_sourceRectangle1.h;
-
-    m_destinationRectangle.x = m_sourceRectangle.x = 0;
-    m_destinationRectangle.y = m_sourceRectangle.y = 0;
-
-    m_destinationRectangle1.x = m_sourceRectangle1.x = 0;
-    m_destinationRectangle1.y = m_sourceRectangle1.y = 80;
-
-
-   
+ 
+    m_textureManager.load("assets/animate-alpha.png", "animate", m_pRenderer);
 
     m_bRunning = true;
     return true;
@@ -67,19 +33,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
-    /*if (m_destinationRectangle.x <= 0)
-    {
-        dir = 1;
-    }
-    else if (m_destinationRectangle.x >= 480-m_destinationRectangle.w)
-    {
-        dir = -1;
-    }
-    m_destinationRectangle.x += dir;
-    SDL_Delay(10);*/
-
-    m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
-    m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
+    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
 }
 
 
@@ -89,8 +43,8 @@ void Game::render()
     
     SDL_RenderClear(m_pRenderer);
     
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
-    SDL_RenderCopy(m_pRenderer, m_pTexture1, &m_sourceRectangle1, &m_destinationRectangle1);
+    m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+    m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
 
   
     SDL_RenderPresent(m_pRenderer);
@@ -120,7 +74,7 @@ void Game::handleEvents()
 
 void Game::clean() 
 {
-    SDL_DestroyTexture(m_pTexture);
+    
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();

@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdParty\SDL\include\SDL2\begin_code.h" />
@@ -238,6 +239,7 @@
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_vulkan.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
