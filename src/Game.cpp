@@ -26,16 +26,16 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
     ;
-    SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
+    //SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
     SDL_Surface* pTempBackground = IMG_Load("assets/animate-alpha.png");
     
 
     
-    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+    //m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
     m_pTexture1 = SDL_CreateTextureFromSurface(m_pRenderer, pTempBackground);
    
   
-    SDL_FreeSurface(pTempSurface);
+    //SDL_FreeSurface(pTempSurface);
     SDL_FreeSurface(pTempBackground);
     
 
@@ -68,19 +68,29 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
 void Game::update()
 {
+    if (m_destinationRectangle1.y <= 0)
+    {
+        dir = 1;
+    }
+    else if (m_destinationRectangle1.y >= m_destinationRectangle1.h)
+    {
+        dir = -1;
+    }
+    m_destinationRectangle1.y += dir;
+    m_destinationRectangle1.x += dir;
     /*if (m_destinationRectangle.x <= 0)
     {
         dir = 1;
     }
-    else if (m_destinationRectangle.x >= 480-m_destinationRectangle.w)
+    else if (m_destinationRectangle.x >= 480 - m_destinationRectangle.w)
     {
         dir = -1;
     }
-    m_destinationRectangle.x += dir;
-    SDL_Delay(10);*/
+    m_destinationRectangle.x += dir;*/
+    SDL_Delay(10);
 
-    m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
-    m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
+    //m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
+   m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
 }
 
 
