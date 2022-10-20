@@ -10,7 +10,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 0, 0, 255);
+                    m_pRenderer, 255, 255, 255, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -61,16 +61,17 @@ bool Game::running()
 
 void Game::handleEvents()
 {
-    SDL_Event event;
-    if (SDL_PollEvent(&event))
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
     {
-        switch (event.type)
-        {
-        case SDL_QUIT:
+        if (e.type == SDL_QUIT)
             m_bRunning = false;
-            break;
-        default:
-            break;
+        else if (e.type == SDL_KEYDOWN)
+        {
+            switch (e.key.keysym.sym) {
+            case SDLK_LEFT:
+                x--;
+            }
         }
     }
 }
