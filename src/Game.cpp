@@ -25,8 +25,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     }
 
     ;
-    SDL_Surface* pTempSurface = IMG_Load("assets/bus.png");
-    //SDL_Surface* pTempBackground = SDL_LoadBMP("assets/animate.bmp");
+    SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
+    //SDL_Surface* pTempBackground = SDL_LoadBMP("assets/123.bmp");
     
 
     
@@ -40,11 +40,11 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
 
   
 
-    m_sourceRectangle.w = 500;
-    m_sourceRectangle.h = 500;
+    m_sourceRectangle.w = 128;
+    m_sourceRectangle.h = 82;
 
-    m_sourceRectangle1.w = 128;
-    m_sourceRectangle1.h = 82;
+    m_sourceRectangle1.w = 200;
+    m_sourceRectangle1.h = 200;
 
     m_destinationRectangle.w = m_sourceRectangle.w;
     m_destinationRectangle.h = m_sourceRectangle.h;
@@ -55,8 +55,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
-    m_destinationRectangle1.x = 0;
-    m_destinationRectangle1.y = 80;
+    m_destinationRectangle.x = 80;
+    m_destinationRectangle.y = 80;
 
 
    
@@ -79,7 +79,7 @@ void Game::update()
     SDL_Delay(10);*/
 
     m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
-    m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
+    //m_sourceRectangle1.x = 128 * ((SDL_GetTicks() / 50) % 6);
 }
 
 
@@ -104,16 +104,26 @@ bool Game::running()
 
 void Game::handleEvents()
 {
-    SDL_Event event;
-    if (SDL_PollEvent(&event))
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
     {
-        switch (event.type)
-        {
-        case SDL_QUIT:
+        if (e.type == SDL_QUIT)
             m_bRunning = false;
-            break;
-        default:
-            break;
+        else if (e.type == SDL_KEYDOWN)
+        {
+            switch (e.key.keysym.sym) {
+            case SDLK_LEFT:
+                m_destinationRectangle.x-=3;
+                break;
+            case SDLK_RIGHT:
+                m_destinationRectangle.x+=3;
+                break;
+            case SDLK_UP:
+                m_destinationRectangle.y -= 3;
+                break;
+            case SDLK_DOWN:
+                m_destinationRectangle.y += 3;
+            }
         }
     }
 }
