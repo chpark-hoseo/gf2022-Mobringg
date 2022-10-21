@@ -11,6 +11,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
                     m_pRenderer, 255, 255, 255, 255);
+                
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -25,7 +26,7 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     };
 
  
-    if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", m_pRenderer))
+    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer))
     {
         return false;
     }
@@ -33,10 +34,47 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_bRunning = true;
     return true;
 }
-
 void Game::update()
 {
-    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
+    man();
+    m_currentFrame = ((SDL_GetTicks() / 100) % 5);
+    SDL_Delay(5);
+    
+}
+
+void Game::man()
+{
+    const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+    
+    if (currentKeyStates[SDL_SCANCODE_LEFT])
+    {
+        alphaS = 2;
+        alpha_x -= 1;
+        m_currentFrame = ((SDL_GetTicks() / 100) % 4);
+
+    }
+
+    else if (currentKeyStates[SDL_SCANCODE_RIGHT])
+    {
+        alphaS = 1;
+        alpha_x += 1;
+        m_currentFrame = ((SDL_GetTicks() / 100) % 4);
+
+    }
+
+    else if (currentKeyStates[SDL_SCANCODE_UP])
+    {
+        alphaS = 3;
+        alpha_y -= 1;
+        m_currentFrame = ((SDL_GetTicks() / 100) % 4);
+    }
+
+    else if (currentKeyStates[SDL_SCANCODE_DOWN])
+    {
+        alphaS = 4;
+        alpha_y += 1;
+        m_currentFrame = ((SDL_GetTicks() / 100) % 4);
+    }
 }
 
 
@@ -46,12 +84,18 @@ void Game::render()
     
     SDL_RenderClear(m_pRenderer);
     
-    TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
-    TheTextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
+    if (alphaS == 1)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
+    else if (alphaS == 2)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 1, m_currentFrame, m_pRenderer);
+    else if (alphaS == 3)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 2, m_currentFrame, m_pRenderer);
+    else if (alphaS == 4)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 3, m_currentFrame, m_pRenderer);
 
   
     SDL_RenderPresent(m_pRenderer);
-    
+    TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
 }
 
 bool Game::running()
@@ -61,17 +105,16 @@ bool Game::running()
 
 void Game::handleEvents()
 {
-    SDL_Event e;
-    while (SDL_PollEvent(&e))
+    SDL_Event event;
+    if (SDL_PollEvent(&event))
     {
-        if (e.type == SDL_QUIT)
-            m_bRunning = false;
-        else if (e.type == SDL_KEYDOWN)
+        switch (event.type)
         {
-            switch (e.key.keysym.sym) {
-            case SDLK_LEFT:
-                x--;
-            }
+        case SDL_QUIT:
+            m_bRunning = false;
+            break;
+        default:
+            break;
         }
     }
 }
