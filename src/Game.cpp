@@ -25,8 +25,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         return false; // SDL 초기화 실패
     };
 
- 
-    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer))
+ //캐릭터 이미지 불러오기
+    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer)) //스프라이트 이미지 배경 투명화 필요
     {
         return false;
     }
@@ -34,15 +34,18 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_bRunning = true;
     return true;
 }
+
+//캐릭터 스프라이트 속도
 void Game::update()
 {
-    man();
+    chr();
     m_currentFrame = ((SDL_GetTicks() / 100) % 5);
     SDL_Delay(5);
     
 }
 
-void Game::man()
+//캐릭터가 키입력을 받아 움직이는 코드
+void Game::chr()
 {
     const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
     
@@ -75,10 +78,14 @@ void Game::man()
         alpha_y += 1;
         m_currentFrame = ((SDL_GetTicks() / 100) % 4);
     }
+    else if (currentKeyStates[SDL_SCANCODE_ESCAPE])
+    {
+        m_bRunning = false;
+    }
 }
 
 
-
+//캐릭터가 진행하는 방향에 따라서 알맞는 스프라이트 이미지 렌더
 void Game::render()
 {
     
@@ -95,7 +102,7 @@ void Game::render()
 
   
     SDL_RenderPresent(m_pRenderer);
-    TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
+    
 }
 
 bool Game::running()
