@@ -2,26 +2,25 @@
 
 #include <SDL2/SDL.h>
 #include "TextureManager.h"
+#define TILE_SIZE 75
+#define collisionCount 100
 
-//타일,충돌 미구현 -> 구현필요
+//벽과의 충돌 미구현 - 최종 업데이트
 
 //스크린 화면 사이즈
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
 
-//레벨층 사이즈
-const int LEVEL_WIDTH = 640;
-const int LEVEL_HEIGHT = 480;
+//레벨층 사이즈 - 레벨 구현 취소
+/*const int LEVEL_WIDTH = 640;
+const int LEVEL_HEIGHT = 480;*/
 
-//맵에 깔리는 타일의 정보
-const int TILE_WIDTH = 80;
+//맵에 깔리는 타일의 정보 - 이미지로 대체완료
+/*const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
 const int TOTAL_TILES = 192;
-const int TOTAL_TILE_SPRITES = 12;
+const int TOTAL_TILE_SPRITES = 12;*/
 
-//타일을 색상별로 id화 
-const int TILE_RED = 0;
-const int TILE_GREEN = 1;
 
 class Game
 {
@@ -48,11 +47,17 @@ private:
 	bool m_bRunning;
 	int m_currentFrame;
 
-	
+	Wall wall[100];
+	Wall wallDes;
 
 	typedef struct SDL_Rect
 	{
 		int x, y;
 		int w, h;
 	} SDL_Rect;
+};
+
+struct Wall
+{
+	int u, d, l, r;
 };

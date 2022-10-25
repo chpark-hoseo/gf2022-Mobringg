@@ -26,14 +26,59 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     };
 
  //캐릭터 이미지 불러오기
-    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer)) //스프라이트 이미지 배경 투명화 필요
+    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer)) //스프라이트 이미지 배경 투명화 필요 - 해결실패
+    {
+        return false;
+    }
+//벽 이미지 불러오기
+    if (!TheTextureManager::Instance()->load("assets/456.png", "Wall", m_pRenderer))
     {
         return false;
     }
 
+//맵(출처:https://www.parallelrealities.co.uk/tutorials/sdl1/intermediate/tutorial11.php
+http://lazyfoo.net/tutorials/SDL/39_tiling/index.php
+https://bikim0108.tistory.com/32)
+
+    int world[10][10] = {
+        { 1,1,1,1,1,1,1,1,1,1 },		
+        { 1,0,1,0,0,0,0,0,0,1 },		
+        { 1,0,1,0,0,0,0,1,0,1 },		
+        { 1,0,0,1,0,0,0,1,0,1 },		
+        { 1,0,0,1,0,0,0,0,0,1 },		
+        { 1,0,0,0,0,1,1,0,0,1 },		
+        { 1,0,0,0,0,1,1,0,0,1 },		
+        { 1,0,0,0,0,0,0,0,0,1 },		
+        { 1,0,0,0,0,1,1,0,2,1 },		
+        { 1,1,1,1,1,1,1,1,1,1 },
+
+    };
+
+    int x = 0;
+    int y = 0;
+
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            if (world[i][j] == 1)
+            {
+                wall[10 * i + j].u = x; wall[10 * i + j].d = y; wall[10 * i + j].l = TILE_SIZE; wall[10 * i + j].r = TILE_SIZE;
+            }
+            else if (world[i][j] == 2)
+            {
+                wallDes.u = x; wallDes.d = y; wallDes.l = TILE_SIZE; wallDes.r = TILE_SIZE;
+            }
+            x += TILE_SIZE;
+        }
+        x = 0;
+        y += TILE_SIZE;
+    }
     m_bRunning = true;
     return true;
 }
+    
+
 
 //캐릭터 스프라이트 속도
 void Game::update()
@@ -78,7 +123,7 @@ void Game::chr()
         alpha_y += 1;
         m_currentFrame = ((SDL_GetTicks() / 100) % 4);
     }
-    else if (currentKeyStates[SDL_SCANCODE_ESCAPE])
+    else if (currentKeyStates[SDL_SCANCODE_ESCAPE]) // ESC입력시 게임 종료
     {
         m_bRunning = false;
     }
@@ -90,6 +135,12 @@ void Game::render()
 {
     
     SDL_RenderClear(m_pRenderer);
+    for (int i = 0; i < collisionCount; i++)
+    {
+        TheTextureManager::Instance()->draw("Wall", wall[i].u, wall[i].d, wall[i].l, wall[i].r, m_pRenderer);
+    }
+
+    TheTextureManager::Instance()->draw("dia", wallDes.u, wallDes.d, wallDes.l, wallDes.r, m_pRenderer);
     
     if (alphaS == 1)
         TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
