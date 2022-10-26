@@ -7,9 +7,6 @@
 
 //벽과의 충돌 미구현 - 최종 업데이트
 
-//스크린 화면 사이즈
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 720;
 
 //레벨층 사이즈 - 레벨 구현 취소
 /*const int LEVEL_WIDTH = 640;
@@ -21,6 +18,10 @@ const int TILE_HEIGHT = 80;
 const int TOTAL_TILES = 192;
 const int TOTAL_TILE_SPRITES = 12;*/
 
+struct Wall
+{
+	int u, d, l, r;
+};
 
 class Game
 {
@@ -57,7 +58,4 @@ private:
 	} SDL_Rect;
 };
 
-struct Wall
-{
-	int u, d, l, r;
-};
+

@@ -42,14 +42,14 @@ https://bikim0108.tistory.com/32)
 
     int world[10][10] = {
         { 1,1,1,1,1,1,1,1,1,1 },		
-        { 1,0,1,0,0,0,0,0,0,1 },		
+        { 1,2,1,0,0,0,0,0,0,1 },		
         { 1,0,1,0,0,0,0,1,0,1 },		
         { 1,0,0,1,0,0,0,1,0,1 },		
         { 1,0,0,1,0,0,0,0,0,1 },		
         { 1,0,0,0,0,1,1,0,0,1 },		
         { 1,0,0,0,0,1,1,0,0,1 },		
         { 1,0,0,0,0,0,0,0,0,1 },		
-        { 1,0,0,0,0,1,1,0,2,1 },		
+        { 1,0,0,0,0,1,1,0,0,1 },		
         { 1,1,1,1,1,1,1,1,1,1 },
 
     };
@@ -67,7 +67,10 @@ https://bikim0108.tistory.com/32)
             }
             else if (world[i][j] == 2)
             {
-                wallDes.u = x; wallDes.d = y; wallDes.l = TILE_SIZE; wallDes.r = TILE_SIZE;
+                alpha_x = i * 90;
+                alpha_y = j * 90;
+
+                // wallDes.u = x; wallDes.d = y; wallDes.l = TILE_SIZE; wallDes.r = TILE_SIZE;
             }
             x += TILE_SIZE;
         }
@@ -140,7 +143,7 @@ void Game::render()
         TheTextureManager::Instance()->draw("Wall", wall[i].u, wall[i].d, wall[i].l, wall[i].r, m_pRenderer);
     }
 
-    TheTextureManager::Instance()->draw("dia", wallDes.u, wallDes.d, wallDes.l, wallDes.r, m_pRenderer);
+    
     
     if (alphaS == 1)
         TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
