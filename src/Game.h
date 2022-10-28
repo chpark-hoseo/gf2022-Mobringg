@@ -2,6 +2,10 @@
 
 #include <SDL2/SDL.h>
 #include "TextureManager.h"
+#include "GameObject.h"
+#include "Player.h"
+
+
 
 
 class Game
@@ -17,13 +21,16 @@ public:
 	void handleEvents();
 	void clean();
 
+	
+
 private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 	int m_currentFrame;
 
-	
+	GameObject m_go;
+	Player m_player;
 
 	typedef struct SDL_Rect
 	{
