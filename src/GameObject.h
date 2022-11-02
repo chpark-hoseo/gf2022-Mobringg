@@ -18,6 +18,7 @@ protected:
 	int m_y;
 	int m_width;
 	int m_height;
+	int dir = 1;
 
 	int m_currentFrame;
 	int m_currentRow;
