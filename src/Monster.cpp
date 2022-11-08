@@ -14,6 +14,7 @@ void Monster::update(int speed)
 {
 	
 	m_currentFrame = ((SDL_GetTicks() / 100) % 6);
+	//스크린 사이즈에 맞게 좌우 끝에 도달시 반대 방향으로 이동
 	if(face == 1)
 	{
 		m_x += speed;

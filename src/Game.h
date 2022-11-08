@@ -5,6 +5,9 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Monster.h"
+#include <vector>
+
+
 
 
 
@@ -20,7 +23,7 @@ public:
 	bool running();
 	void handleEvents();
 	void clean();
-
+	std::vector<GameObject*> m_gameObjects;
 	
 
 private:
@@ -29,10 +32,9 @@ private:
 	bool m_bRunning;
 	int m_currentFrame;
 
-	GameObject m_go;
-	Player m_player;
-	Monster m_monster;
-	Monster m_monster2;
+	
+	
+	
 
 	typedef struct SDL_Rect
 	{

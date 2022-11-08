@@ -11,7 +11,7 @@ public:
     void clean() {};
 
 private:
-    bool face = 1;
-    int speed = 1;
+    bool face = 1; //x방향 좌우값 초기화
+    int speed = 1; //몬스터 스피드 설정을 위한 초기화
 };
 
