@@ -23,15 +23,18 @@ public:
 	bool running();
 	void handleEvents();
 	void clean();
-	std::vector<GameObject*> m_gameObjects;
+	
 	
 
 private:
+	std::vector<GameObject*> m_gameObjects;
+
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
+
 	bool m_bRunning;
 	int m_currentFrame;
-
+	
 	
 	
 	
