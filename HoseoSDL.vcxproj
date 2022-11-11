@@ -143,11 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Monster.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SDLGameObject.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3rdParty\SDL\include\SDL2\begin_code.h" />
@@ -241,11 +242,14 @@
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_video.h" />
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_vulkan.h" />
     <ClInclude Include="include\main.h" />
-    <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\GameObject.h" />
-    <ClInclude Include="src\Monster.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="src\LoaderParams.h" />
+    <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\SDLGameObject.h" />
     <ClInclude Include="src\TextureManager.h" />
+    <ClInclude Include="src\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
