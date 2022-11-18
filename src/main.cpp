@@ -19,7 +19,11 @@ int main(int argc, char* argv[])
             if (frameTime < DELAY_TIME) {
                 SDL_Delay((int)(DELAY_TIME - frameTime));
             }
-        }
+        } 
+    }
+    else {
+        std::cout << "game init failure " << SDL_GetError() << "\n";
+        return -1;
     }
     TheGame::Instance()->clean();
     return 0;
