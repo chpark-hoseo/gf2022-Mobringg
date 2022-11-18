@@ -30,6 +30,7 @@ public:
 	void clean();
 	
 	
+	
 private:
 	std::vector<GameObject*> m_gameObjects;
 	Game() { }
