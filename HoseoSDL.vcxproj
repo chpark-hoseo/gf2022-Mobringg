@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -241,9 +242,16 @@
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_version.h" />
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_video.h" />
     <ClInclude Include="3rdParty\SDL\include\SDL2\SDL_vulkan.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\LoaderParams.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\SDLGameObject.h" />
+    <ClInclude Include="include\TextureManager.h" />
+    <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="src\LoaderParams.h" />
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\Player.h" />

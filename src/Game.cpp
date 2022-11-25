@@ -73,21 +73,6 @@ bool Game::running()
     return m_bRunning;
 }
 
-void Game::handleEvents()
-{
-    SDL_Event event;
-    if (SDL_PollEvent(&event))
-    {
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            m_bRunning = false;
-            break;
-        default:
-            break;
-        }
-    }
-}
 
 void Game::handleEvents()
 {
