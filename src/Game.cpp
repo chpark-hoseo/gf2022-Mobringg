@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "InputHandler.h"
 #pragma once
 
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, int flags)
@@ -88,9 +89,14 @@ void Game::handleEvents()
     }
 }
 
+void Game::handleEvents()
+{
+    TheInputHandler::Instance()->update();
+}
+
 void Game::clean() 
 {
-    
+    TheInputHandler::Instance()->clean();
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
