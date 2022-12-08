@@ -27,12 +27,52 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     };
 
  
-    if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", m_pRenderer))
+    if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer))
     {
         return false;
     }
+    if (!TheTextureManager::Instance()->load("assets/456.png", "Wall", m_pRenderer))
+    {
+        return false;
+    }
+    int world[10][10] = {
+       { 1,1,1,1,1,1,1,1,1,1 },
+       { 1,2,1,0,0,0,0,0,0,1 },
+       { 1,0,1,0,0,0,0,1,0,1 },
+       { 1,0,0,1,0,0,0,1,0,1 },
+       { 1,0,0,1,0,0,0,0,0,1 },
+       { 1,0,0,0,0,1,1,0,0,1 },
+       { 1,0,0,0,0,1,1,0,0,1 },
+       { 1,0,0,0,0,0,0,0,0,1 },
+       { 1,0,0,0,0,1,1,0,0,1 },
+       { 1,1,1,1,1,1,1,1,1,1 },
 
-    
+    };
+    int x = 0;
+    int y = 0;
+
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            if (world[i][j] == 1)
+            {
+                wall[10 * i + j].u = x; wall[10 * i + j].d = y; wall[10 * i + j].l = TILE_SIZE; wall[10 * i + j].r = TILE_SIZE;
+            }
+            else if (world[i][j] == 2)
+            {
+                alpha_x = i * 90;
+                alpha_y = j * 90;
+
+                // wallDes.u = x; wallDes.d = y; wallDes.l = TILE_SIZE; wallDes.r = TILE_SIZE;
+            }
+            x += TILE_SIZE;
+        }
+        x = 0;
+        y += TILE_SIZE;
+    }
+    m_bRunning = true;
+    return true;
 
     m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
     m_gameObjects.push_back(new Enemy(new LoaderParams(300, 100, 128, 82, "animate")));

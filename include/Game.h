@@ -6,10 +6,15 @@
 #include "Player.h"
 #include "Enemy.h"
 #include <vector>
+#define TILE_SIZE 75
+#define collisionCount 100
 
 class GameObject;
 
-
+struct Wall
+{
+	int u, d, l, r;
+};
 
 class Game
 {
@@ -30,6 +35,10 @@ public:
 	void clean();
 	void quit() { m_bRunning = false; }
 	
+	int alphaS = 1;
+	int alpha_x;
+	int alpha_y;
+
 private:
 	std::vector<GameObject*> m_gameObjects;
 	Game() { }
@@ -42,6 +51,9 @@ private:
 
 	bool m_bRunning;
 	int m_currentFrame;
+
+	Wall wall[100];
+	Wall wallDes;
 
 	
 
