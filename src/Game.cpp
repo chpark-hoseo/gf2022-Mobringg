@@ -26,6 +26,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
         return false; // SDL 초기화 실패
     };
 
+    
+    
  
     if (!TheTextureManager::Instance()->load("assets/145.bmp", "Chr", m_pRenderer))
     {
@@ -74,8 +76,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     m_bRunning = true;
     return true;
 
-    m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
-    m_gameObjects.push_back(new Enemy(new LoaderParams(300, 100, 128, 82, "animate")));
+    m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "Chr")));
+    //m_gameObjects.push_back(new Enemy(new LoaderParams(300, 100, 128, 82, "animate")));
 
     m_bRunning = true;
     return true;
@@ -103,6 +105,21 @@ void Game::render()
     for (int i = 0; i != m_gameObjects.size(); i++) {
         m_gameObjects[i]->draw();
     }
+    SDL_RenderClear(m_pRenderer);
+
+    for (int i = 0; i < collisionCount; i++)
+    {
+        TheTextureManager::Instance()->draw("Wall", wall[i].u, wall[i].d, wall[i].l, wall[i].r, m_pRenderer);
+    }
+    if (alphaS == 1)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x,alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
+    else if (alphaS == 2)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 1, m_currentFrame, m_pRenderer);
+    else if (alphaS == 3)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 2, m_currentFrame, m_pRenderer);
+    else if (alphaS == 4)
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 3, m_currentFrame, m_pRenderer);
+    
   
     SDL_RenderPresent(m_pRenderer);
     

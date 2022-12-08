@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Vector2D.h"
 #include <vector>
 #define TILE_SIZE 75
 #define collisionCount 100
@@ -35,7 +36,7 @@ public:
 	void clean();
 	void quit() { m_bRunning = false; }
 	
-	int alphaS = 1;
+	int alphaS;
 	int alpha_x;
 	int alpha_y;
 

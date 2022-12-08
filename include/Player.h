@@ -13,4 +13,9 @@ public:
     virtual void update();
     virtual void clean();
     virtual void handleInput();
+
+    int alphaS = 1;
+    int alpha_x;
+    int alpha_y;
+    
 };
