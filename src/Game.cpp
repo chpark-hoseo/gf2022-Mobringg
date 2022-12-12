@@ -53,17 +53,17 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, in
     int x = 0;
     int y = 0;
 
-    for (int i = 0; i < 10; i++)
+    for (int a = 0; a < 10; a++)
     {
         for (int j = 0; j < 10; j++)
         {
-            if (world[i][j] == 1)
+            if (world[a][j] == 1)
             {
-                wall[10 * i + j].u = x; wall[10 * i + j].d = y; wall[10 * i + j].l = TILE_SIZE; wall[10 * i + j].r = TILE_SIZE;
+                wall[10 * a + j].u = x; wall[10 * a + j].d = y; wall[10 * a + j].l = TILE_SIZE; wall[10 * a + j].r = TILE_SIZE;
             }
-            else if (world[i][j] == 2)
+            else if (world[a][j] == 2)
             {
-                alpha_x = i * 90;
+                alpha_x = a * 90;
                 alpha_y = j * 90;
 
                 // wallDes.u = x; wallDes.d = y; wallDes.l = TILE_SIZE; wallDes.r = TILE_SIZE;
@@ -87,7 +87,7 @@ Game* Game::s_pInstance = 0;
 
 void Game::update()
 {
-    printf("dd");
+    
     for (int i = 0;  i < m_gameObjects.size(); i++)
     {
         m_gameObjects[i]->update();

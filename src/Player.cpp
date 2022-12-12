@@ -32,7 +32,7 @@ void Player::handleInput()
         
         alphaS = 2;
         m_velocity.setX(-2);
-        printf("dd");
+        
     }
     if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)) {
         
