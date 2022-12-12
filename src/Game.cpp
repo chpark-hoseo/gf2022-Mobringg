@@ -87,12 +87,14 @@ Game* Game::s_pInstance = 0;
 
 void Game::update()
 {
+    printf("dd");
     for (int i = 0;  i < m_gameObjects.size(); i++)
     {
         m_gameObjects[i]->update();
     }
-    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
+    m_currentFrame = ((SDL_GetTicks() / 100) % 4);
     
+   
 }
 
 
@@ -112,9 +114,15 @@ void Game::render()
         TheTextureManager::Instance()->draw("Wall", wall[i].u, wall[i].d, wall[i].l, wall[i].r, m_pRenderer);
     }
     if (alphaS == 1)
-        TheTextureManager::Instance()->drawFrame("Chr", alpha_x,alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
+    
+        TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 0, m_currentFrame, m_pRenderer);
+       
+    
     else if (alphaS == 2)
+    
         TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 1, m_currentFrame, m_pRenderer);
+        
+    
     else if (alphaS == 3)
         TheTextureManager::Instance()->drawFrame("Chr", alpha_x, alpha_y, 50, 50, 2, m_currentFrame, m_pRenderer);
     else if (alphaS == 4)

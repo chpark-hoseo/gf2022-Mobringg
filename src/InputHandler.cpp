@@ -41,13 +41,5 @@ bool InputHandler::isKeyDown(SDL_Scancode key)
 
 
 
-void InputHandler::onKeyDown()
-{
-    m_keystates = SDL_GetKeyboardState(0);
-}
 
-void InputHandler::onKeyUp()
-{
-    m_keystates = SDL_GetKeyboardState(0);
-}
 

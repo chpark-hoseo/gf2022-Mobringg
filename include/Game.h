@@ -36,7 +36,7 @@ public:
 	void clean();
 	void quit() { m_bRunning = false; }
 	
-	int alphaS;
+	int alphaS = 1;
 	int alpha_x;
 	int alpha_y;
 
